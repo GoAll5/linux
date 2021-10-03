@@ -6,4 +6,109 @@
 mkdir /home/user/test
 
 #task2
+ls -la /etc >> /home/user/test/list
+
+#task3
+find /etc -type d | wc -l >> /home/user/test/list
+files_a=$(ls -a /etc | wc -l)
+files=$(ls /etc | wc -l)
+let answer=files_a-files
+echo $answer >> /home/user/test/list
+
+#task4
+mkdir /home/user/test/links
+
+#task5
+ln /home/user/test/list /home/user/test/links/list_hlink
+#task6
+ln -s /home/user/test/list /home/user/test/links/list_slink
+#task7
+num_hlink1=$(ls -l /home/user/test/links/list_hlink | cut -d ' ' -f 2)
+echo $num_hlink1
+num_hlink2=$(ls -l /home/user/test/list | cut -d ' ' -f 2)
+echo $num_hlink2
+num_hlink3=$(ls -l /home/user/test/links/list_slink | cut -d ' ' -f 2)
+echo $num_hlink3
+#task8
+wc -l /home/user/test/list >> /home/user/test/links/list_hlink #file links?
+#task9
+difference=(cmp /home/user/test/links/list_hlink /home/user/test/links/list_hlink)
+if [[ $difference ]]; then
+	echo YES
+fi
+
+#task10
+mv /home/user/test/list /home/user/test/list1
+
+#task11
+difference1=(cmp /home/user/test/links/list_hlink /home/user/test/links/list_hlink)
+if [[ $difference1 ]]; then
+	echo YES
+fi
+
+#task12
+ln /home/user/test/links/list_link /home/user/list1 #no such file or directory
+
+#task13
+find /etc -name '*.conf' >> /home/user/list_conf
+
+#task14
+find /etc -name '*.d' >> /home/user/list_d
+
+
+#task15
+cat /home/user/list_conf /home/user/list_d >> list_conf_d
+
+#task16
+mkdir /home/user/test/.sub
+
+#task17
+cp /home/user/list_conf_d /home/user/test/.sub
+
+#task18
+cp /home/user/list_conf_d --backup=numbered /home/user/list_conf_d /home/user/test/.sub
+
+#task19
+tree /home/user/test
+
+#task20
+man --help >> man.txt
+
+#task21
+split -b 1KB man.txt
+
+#task22
+mkdir /home/user/man.dir
+
+#task23
+mv /home/user/xa? /home/user/man.dir
+
+#task24
+cat /home/user/man.dir/xa* >> /home/user/man.dir/man.txt
+
+#task25
+difference25=(cmp /home/user/man.txt /home/user/man.dir/man.dir/man.txt)
+if [[ $difference25 ]]; then
+	echo YES
+fi
+
+#task26
+echo 'start' | cat /home/user/man.txt > /home/user/file
+mv /home/user/file /home/user/man.txt
+echo 'finish' >> /home/user/man.txt
+
+#task27
+diff /home/user/man.txt /home/user/man.dir/man.txt >> /home/user/task27
+
+#task28
+mv /home/user/task27 /home/user/man.dir/task28
+
+#task29
+patch /home/user/man.dir/man.txt /home/user/man.dir/task28
+
+#task30
+difference30=(cmp /home/user/man.txt /home/user/man.dir/man.txt)
+if [[ $difference30 ]]; then
+	echo YES
+fi
 
